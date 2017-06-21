@@ -3,7 +3,7 @@ const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
 const app = express();
 
-app.engine('mustache', mustache() )
+app.engine('mustache', mustacheExpress() )
 
 app.set('view engine', 'mustache');
 
@@ -14,24 +14,18 @@ app.listen(3000, function(){
   console.log("Server connected!");
 });
 
-app.get('/', function(request, response){
-  response.render(pageTitle: "Home page");
+app.get('/form', function(request, response){
+  response.render('form', {pageTitle: "Home page"});
 
 })
 
-app.get('/form', function(request, response){
+app.post('/thankyou', function(request, response){
 
-  const name = request.body.name;
-  const email = request.body.email;
-  const birthYear = request.body.birthYear;
-  const position = request.body.position;
-  const password = request.body.password;
-
-  response.render("index", {
-    name: ,
-    email: ,
-    birthYear: ,
-    position: ,
-    password:
+  response.render("thankyou", {
+    name: request.body.name,
+    email: request.body.email,
+    birthYear: request.body.birthYear,
+    position: request.body.position,
+    password: request.body.password
   });
 });
